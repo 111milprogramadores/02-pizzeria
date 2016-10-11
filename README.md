@@ -1,4 +1,5 @@
 # Pizzeria
+![Image of Pizza](http://oceanstudiescharterschool.com/wp-content/uploads/2012/10/pizza1.jpg)
 ## Ejercicio 2 de Programación Orientada a Objetos
 > Este ejercicio forma parte de la Guía Práctica del módulo Programación Orientada a Objetos
 > del programa nacional [111mil Programadores](https://www.argentina.gob.ar/111mil).
