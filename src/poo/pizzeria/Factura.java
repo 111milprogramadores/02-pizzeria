@@ -5,6 +5,7 @@
  */
 package poo.pizzeria;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class Factura {
      * Constructor por defecto de la clase Factura.
      */
     public Factura() {
+        detallesPedido= new ArrayList();
     }
     
     /**

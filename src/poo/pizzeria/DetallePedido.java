@@ -90,4 +90,12 @@ public class DetallePedido {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb=new StringBuilder();
+        sb.append("\n Cantidad: ").append(cantidad).append("\n Precio: ").append(precio).append("Pizza: ").append(pizza.getNombre()).append("\n Estado: ").append(estado.getNombre());
+        return sb.toString();
+    }
+    
 }
