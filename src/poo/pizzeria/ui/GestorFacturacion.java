@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package poo.pizzeria;
+package poo.pizzeria.ui;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JFrame;
-import poo.pizzeria.cu.PantallaFacturacion;
+import poo.pizzeria.Pedido;
+import poo.pizzeria.ui.PantallaFacturacion;
 
 /**
  *
@@ -61,6 +62,8 @@ public class GestorFacturacion
         this.pedidos = pedidos;
     }
      
-   
+    public void run () {
+        
+    }
          
 }

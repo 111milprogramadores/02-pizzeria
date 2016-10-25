@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 import poo.pizzeria.DetallePedido;
 import poo.pizzeria.Estado;
-import poo.pizzeria.GestorFacturacion;
+import poo.pizzeria.ui.GestorFacturacion;
 import poo.pizzeria.Pedido;
 import poo.pizzeria.Pizza;
 import poo.pizzeria.TamanioPizza;
