@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import poo.pizzeria.DetallePedido;
-import poo.pizzeria.Estado;
+import poo.pizzeria.EstadoPedido;
 import poo.pizzeria.Pedido;
 import poo.pizzeria.Pizza;
 
@@ -22,12 +22,12 @@ public class PedidosDaoImpl implements PedidosDao {
     
     private final List<Pedido> pedidos;
 
-    public PedidosDaoImpl(PizzasDao pizzasDao, EstadosDao estadosDao) {
+    public PedidosDaoImpl(PizzasDao pizzasDao, EstadosPedidoDao estadosDao) {
         this.pedidos = new ArrayList<>();
         Calendar ahora = Calendar.getInstance();
         
         // obtenemos el estado del pedido Pendiente de Facturación.
-        Estado pteFacturacion = estadosDao.buscarPorNombre("Pendiente de Facturación");
+        EstadoPedido pteFacturacion = estadosDao.buscarPorNombre("Pendiente de Facturación");
         
         // obtenemos las pizzas
         Pizza napolitanaNormal = pizzasDao.buscarPorNombre("Napolitana Normal");

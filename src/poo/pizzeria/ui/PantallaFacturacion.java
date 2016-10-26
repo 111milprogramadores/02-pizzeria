@@ -17,20 +17,18 @@ import poo.pizzeria.Pedido;
 public class PantallaFacturacion extends javax.swing.JFrame {
     
     private final GestorFacturacion gestor;
-    private final List<Pedido> pedidosPendientes;
     
     private final TablaPedidosModel tablaPedidosModel;
     private final TablaDetallePedidoModel tablaDetallePedidoModel;
     
     /**
      * Creates new form PantallaFacturacion
-     * @param pedidosPendientes
+     * 
      * @param gestor
      */
-    public PantallaFacturacion (List<Pedido> pedidosPendientes,  GestorFacturacion gestor) {
+    public PantallaFacturacion (GestorFacturacion gestor) {
         this.gestor = gestor;
-        this.pedidosPendientes = pedidosPendientes;
-        this.tablaPedidosModel = new TablaPedidosModel(pedidosPendientes);
+        this.tablaPedidosModel = new TablaPedidosModel(gestor.buscarPedidosPtesFacturacion());
         this.tablaDetallePedidoModel = new TablaDetallePedidoModel();
         
         initComponents();
@@ -203,6 +201,17 @@ public class PantallaFacturacion extends javax.swing.JFrame {
                 // delegamos la generación de la factura al gestor
                 gestor.setPedido(seleccionado);
                 gestor.generarFactura();
+                
+                // actualizamos el listado de pedidos pendientes
+                tablaPedidosModel.setPedidos(gestor.buscarPedidosPtesFacturacion());
+                tablaPedidosModel.fireTableDataChanged();
+                
+                // vaciamos la tabla de detalle de pedido
+                tablaDetallePedidoModel.setDetalles(null);
+                tablaDetallePedidoModel.fireTableDataChanged();
+                
+                // mostramos la ventana de confirmacion de impresion
+                new PantallaFacturaGenerada(seleccionado, gestor).setVisible(true);
             }
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed

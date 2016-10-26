@@ -18,7 +18,7 @@ public final class TablaPedidosModel extends AbstractTableModel {
 
     private static final String[] COLUMNAS = { "Número", "Fecha", "Hora", "Cliente" };
     
-    private final List<Pedido> pedidos;
+    private List<Pedido> pedidos;
     private final SimpleDateFormat formatoFecha;
     private final SimpleDateFormat formatoHora;
 
@@ -71,4 +71,9 @@ public final class TablaPedidosModel extends AbstractTableModel {
     public Pedido obtenerPedidoEn (int fila) {
         return pedidos.get(fila);
     }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+    
 }

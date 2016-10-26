@@ -8,9 +8,15 @@ package poo.pizzeria.ui;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import poo.pizzeria.EstadoFactura;
+import poo.pizzeria.EstadoPedido;
+import poo.pizzeria.Factura;
 import poo.pizzeria.Pedido;
-import poo.pizzeria.dao.EstadosDao;
-import poo.pizzeria.dao.EstadosDaoImpl;
+import poo.pizzeria.dao.EstadosFacturaDao;
+import poo.pizzeria.dao.EstadosFacturaDaoImpl;
+import poo.pizzeria.dao.EstadosPedidoDaoImpl;
+import poo.pizzeria.dao.FacturasDao;
+import poo.pizzeria.dao.FacturasDaoImpl;
 import poo.pizzeria.dao.PedidosDao;
 import poo.pizzeria.dao.PedidosDaoImpl;
 import poo.pizzeria.dao.PizzasDao;
@@ -21,6 +27,7 @@ import poo.pizzeria.dao.TiposDao;
 import poo.pizzeria.dao.TiposDaoImpl;
 import poo.pizzeria.dao.VariedadesDao;
 import poo.pizzeria.dao.VariedadesDaoImpl;
+import poo.pizzeria.dao.EstadosPedidoDao;
 
 /**
  *
@@ -30,10 +37,12 @@ public class GestorFacturacion {
     
     private final PedidosDao pedidosDao;
     private final PizzasDao pizzasDao;
-    private final EstadosDao estadosDao;
+    private final EstadosPedidoDao estadosPedidoDao;
+    private final EstadosFacturaDao estadosFacturaDao;
     private final TiposDao tiposDao;
     private final VariedadesDao variedadesDao;
     private final TamaniosDao tamaniosDao;
+    private final FacturasDao facturasDao;
     
     private Pedido pedido;
 
@@ -46,31 +55,43 @@ public class GestorFacturacion {
         this.variedadesDao = new VariedadesDaoImpl();
         this.tamaniosDao = new TamaniosDaoImpl();
         this.pizzasDao = new PizzasDaoImpl(tiposDao, variedadesDao, tamaniosDao);
-        this.estadosDao = new EstadosDaoImpl();
-        this.pedidosDao = new PedidosDaoImpl(pizzasDao, estadosDao);
+        this.estadosPedidoDao = new EstadosPedidoDaoImpl();
+        this.estadosFacturaDao = new EstadosFacturaDaoImpl();
+        this.pedidosDao = new PedidosDaoImpl(pizzasDao, estadosPedidoDao);
+        this.facturasDao = new FacturasDaoImpl();
     }
 
     public void run () {
-        List<Pedido> pedidosPendientes = pedidosDao.buscarPendientesDeFacturacion();
-        
-        new PantallaFacturacion(pedidosPendientes, this).setVisible(true);
+        new PantallaFacturacion(this).setVisible(true);
     }
 
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
     
+    public List<Pedido> buscarPedidosPtesFacturacion () {
+        return pedidosDao.buscarPendientesDeFacturacion();
+    }
+    
     public void generarFactura () {
-        // ...
+        // buscamos las entidades relacionadas
+        int numero = facturasDao.obtenerProximoNumero();
+        EstadoFactura generada = estadosFacturaDao.buscarPorNombre("Generada");
+        EstadoPedido facturado = estadosPedidoDao.buscarPorNombre("Facturado");
+        Date ahora = Calendar.getInstance().getTime();
+        
+        // creamos la factura para el pedido
+        Factura factura = new Factura(ahora, numero, generada, pedido.getDetallesPedido());
+        
+        // facturamos el pedido
+        pedido.facturar (factura, facturado);
+        
+        // guardamos la factura en el repositorio de datos
+        facturasDao.guardar(factura);
     }
-    
-    public Date obtenerFechaYHoraActual () {
-        return Calendar.getInstance().getTime();
-    }
-    
-    public int obtenerNumeroFactura () {
-        // TODO obtener el siguiente nro de factura
-        return -1;
+
+    public void imprimir(Pedido pedido) {
+        new ImpresorFactura(pedido).setVisible(true);
     }
          
 }

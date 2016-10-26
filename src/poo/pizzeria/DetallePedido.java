@@ -17,7 +17,7 @@ public class DetallePedido {
     private int cantidad;
     private BigDecimal precio;
     private Pizza pizza;
-    private Estado estado;
+    private EstadoPedido estado;
     
     /**
      * Constructor por defecto de la clase DetallePedido.
@@ -42,7 +42,7 @@ public class DetallePedido {
      * @param pizza
      * @param estado 
      */
-    public DetallePedido(int cantidad, BigDecimal precio, Pizza pizza, Estado estado) {
+    public DetallePedido(int cantidad, BigDecimal precio, Pizza pizza, EstadoPedido estado) {
         this.cantidad = cantidad;
         this.precio = precio;
         this.pizza = pizza;
@@ -84,11 +84,11 @@ public class DetallePedido {
         this.pizza = pizza;
     }
 
-    public Estado getEstado() {
+    public EstadoPedido getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(EstadoPedido estado) {
         this.estado = estado;
     }
 

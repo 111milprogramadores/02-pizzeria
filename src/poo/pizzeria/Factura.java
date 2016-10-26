@@ -14,9 +14,10 @@ import java.util.List;
  * @author Candelaria
  */
 public class Factura {
+    
     private Date fechaHoraEmision;
     private long numero;
-    private Estado estado;
+    private EstadoFactura estado;
     private List<DetallePedido> detallesPedido;
 
     /**
@@ -42,7 +43,7 @@ public class Factura {
      * @param estado
      * @param detallesPedido 
      */
-    public Factura(Date fechaHoraEmision, long numero, Estado estado, List<DetallePedido> detallesPedido) {
+    public Factura(Date fechaHoraEmision, long numero, EstadoFactura estado, List<DetallePedido> detallesPedido) {
         this.fechaHoraEmision = fechaHoraEmision;
         this.numero = numero;
         this.estado = estado;
@@ -68,11 +69,11 @@ public class Factura {
         this.numero = numero;
     }
 
-    public Estado getEstado() {
+    public EstadoFactura getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(EstadoFactura estado) {
         this.estado = estado;
     }
 

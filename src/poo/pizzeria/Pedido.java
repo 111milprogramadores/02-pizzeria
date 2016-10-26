@@ -16,12 +16,13 @@ import java.util.List;
  * @author Candelaria
  */
 public class Pedido {
+    
     private Date fechaHoraCreacion;
     private Date fechaHoraEntrega;    
     private String nombreCliente;
     private int numero;
     private Factura factura;
-    private Estado estado;
+    private EstadoPedido estado;
     private List<DetallePedido> detallesPedido;
 
     /**
@@ -55,7 +56,7 @@ public class Pedido {
      * @param estado
      * @param detallesPedido 
      */
-    public Pedido(Date fechaHoraCreacion,Date fechaHoraEntrega,String nombreCliente, int numero, Factura factura, Estado estado, List<DetallePedido> detallesPedido) {
+    public Pedido(Date fechaHoraCreacion,Date fechaHoraEntrega,String nombreCliente, int numero, Factura factura, EstadoPedido estado, List<DetallePedido> detallesPedido) {
         this.fechaHoraEntrega = fechaHoraEntrega;
         this.fechaHoraCreacion = fechaHoraCreacion;
         this.nombreCliente = nombreCliente;
@@ -85,6 +86,14 @@ public class Pedido {
         }
         
         return total;
+    }
+
+    public void facturar (Factura factura, EstadoPedido facturado) {
+        // asignamos la factura para este pedido
+        this.factura = factura;
+        
+        // y realizamos el cambio de estado correspondiente
+        this.estado = facturado;
     }
     
     // A continuación se listan todos los métodos de seteo
@@ -130,11 +139,11 @@ public class Pedido {
         this.factura = factura;
     }
 
-    public Estado getEstado() {
+    public EstadoPedido getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(EstadoPedido estado) {
         this.estado = estado;
     }
 
@@ -164,6 +173,5 @@ public class Pedido {
         }
         return  retorno.toString();
     }
-    
     
 }

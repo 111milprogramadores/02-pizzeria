@@ -19,6 +19,13 @@ class TablaDetallePedidoModel extends AbstractTableModel {
     
     private List<DetallePedido> detalles;
 
+    public TablaDetallePedidoModel() {
+    }
+
+    public TablaDetallePedidoModel(List<DetallePedido> detalles) {
+        this.detalles = detalles;
+    }
+
     @Override
     public int getRowCount() {
         return detalles == null ? 0 : detalles.size();

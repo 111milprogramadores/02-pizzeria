@@ -8,30 +8,30 @@ package poo.pizzeria.dao;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import poo.pizzeria.Estado;
+import poo.pizzeria.EstadoFactura;
 
 /**
  *
  * @author joaquinleonelrobles
  */
-public class EstadosDaoImpl implements EstadosDao {
+public class EstadosFacturaDaoImpl implements EstadosFacturaDao {
     
-    private final List<Estado> estados;
+    private final List<EstadoFactura> estados;
 
-    public EstadosDaoImpl() {
+    public EstadosFacturaDaoImpl() {
         this.estados = new ArrayList<>();
         
         // agregamos los estados iniciales
-        this.estados.add(new Estado("Pendiente de Facturación", "El Pedido se encuentra listo sin Factura generada"));
+        this.estados.add(new EstadoFactura("Generada", "La Factura se encuentra generada"));
     }
 
     @Override
-    public Estado buscarPorNombre(String nombre) {
-        Estado retorno = null;
+    public EstadoFactura buscarPorNombre(String nombre) {
+        EstadoFactura retorno = null;
         
-        Iterator<Estado> iter = estados.iterator();
+        Iterator<EstadoFactura> iter = estados.iterator();
         while (iter.hasNext()) {
-            Estado actual = iter.next();
+            EstadoFactura actual = iter.next();
             
             if (actual.getNombre().equals(nombre)) {
                 retorno = actual;

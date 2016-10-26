@@ -5,14 +5,14 @@
  */
 package poo.pizzeria.dao;
 
-import poo.pizzeria.Estado;
+import poo.pizzeria.EstadoFactura;
 
 /**
  *
  * @author joaquinleonelrobles
  */
-public interface EstadosDao {
+public interface EstadosFacturaDao {
     
-    public Estado buscarPorNombre (String nombre);
+    public EstadoFactura buscarPorNombre (String nombre);
     
 }

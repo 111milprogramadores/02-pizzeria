@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 import poo.pizzeria.DetallePedido;
-import poo.pizzeria.Estado;
+import poo.pizzeria.EstadoPedido;
 import poo.pizzeria.ui.GestorFacturacion;
 import poo.pizzeria.Pedido;
 import poo.pizzeria.Pizza;
@@ -68,7 +68,7 @@ public class Main {
          pedido.setNombreCliente("María Cortez");
          pedido.setNumero(1);
          //Creamos el estado del pedido Pendiente de Facturación.
-         Estado pteFacturacion= new Estado("Pendiente de Facturación","La pizza se encuentra lista, sin factura creada");
+         EstadoPedido pteFacturacion= new EstadoPedido("Pendiente de Facturación","La pizza se encuentra lista, sin factura creada");
          pedido.setEstado(pteFacturacion);
         
          //Creamos los detalles del pedido para luego asignarselos al pedido.

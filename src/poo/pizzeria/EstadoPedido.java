@@ -9,14 +9,14 @@ package poo.pizzeria;
  *
  * @author Candelaria
  */
-public class Estado {
+public class EstadoPedido {
     private String nombre;
     private String descripcion;
     
     /**
      * Constructor por defecto de la clase Estado.
      */
-    public Estado() {
+    public EstadoPedido() {
     }
     
     /**
@@ -24,7 +24,7 @@ public class Estado {
      * @param nombre
      * @param descripcion 
      */
-    public Estado(String nombre, String descripcion) {
+    public EstadoPedido(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
