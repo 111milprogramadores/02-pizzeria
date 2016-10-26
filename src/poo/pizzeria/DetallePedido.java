@@ -6,6 +6,7 @@
 package poo.pizzeria;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 /**
  *
@@ -96,6 +97,10 @@ public class DetallePedido {
         StringBuilder sb=new StringBuilder();
         sb.append("\n Cantidad: ").append(cantidad).append("\n Precio: ").append(precio).append("Pizza: ").append(pizza.getNombre()).append("\n Estado: ").append(estado.getNombre());
         return sb.toString();
+    }
+
+    public BigDecimal getSubtotal() {
+        return precio.multiply(new BigDecimal(cantidad));
     }
     
 }

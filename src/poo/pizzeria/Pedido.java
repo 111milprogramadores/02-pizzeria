@@ -150,7 +150,13 @@ public class Pedido {
 
     @Override
     public String toString() {
-        StringBuilder retorno = new StringBuilder().append("\n Pedido: Fecha Hora Creacion: ").append(fechaHoraCreacion).append(" FechaHoraEntrega: ").append(fechaHoraEntrega).append("\n - N° Pedido: ").append(numero).append("\n - Cliente: ").append(nombreCliente).append(" - Estado: ").append(estado.getNombre());
+        StringBuilder retorno = new StringBuilder().append("\n Pedido: Fecha Hora Creacion: ");
+                retorno.append(fechaHoraCreacion);
+                retorno.append(" FechaHoraEntrega: ").append(fechaHoraEntrega);
+                retorno.append("\n - N° Pedido: ").append(numero);
+                retorno.append("\n - Cliente: ").append(nombreCliente);
+                retorno.append(" - Estado: ").append(estado.getNombre());
+        
         Iterator it = detallesPedido.iterator();
         while(it.hasNext())
         {

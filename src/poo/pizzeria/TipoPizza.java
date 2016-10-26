@@ -47,4 +47,10 @@ public class TipoPizza {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
+    
 }

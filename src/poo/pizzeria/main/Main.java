@@ -137,17 +137,6 @@ public class Main {
          pedidos.add(pedido);
          pedidos.add(pedido2);
          pedidos.add(pedido3);
-         
-         //Le pasamos al gestor los pedidos creados.
-         gestor.setPedidos(pedidos);
-         
-         //System.out.print(gestor.buscarPedidosPtesFacturacion().toString());
-         //El metodo que inicia la generación de una factura.
-         gestor.nuevaFactura();
-            System.out.println("en el MAIN");
-         
-         
-         
     }
     
 }
