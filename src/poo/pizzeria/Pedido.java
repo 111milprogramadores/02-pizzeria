@@ -77,16 +77,14 @@ public class Pedido {
      * Método que calcula el total del pedido, es decir suma todos los subtotales de los detalles.
      * @return BigDecimal
      */
-    public BigDecimal calcTotalPedido()
-    {
-       BigDecimal total= new BigDecimal(0);
-       Iterator it= detallesPedido.iterator();
-       while(it.hasNext())
-       {
-           DetallePedido detalle= (DetallePedido)it.next();
-           total.add(detalle.calcTotalItem());
-       }
-       return total;
+    public BigDecimal calcTotalPedido() {
+        BigDecimal total = BigDecimal.ZERO;
+        
+        for (DetallePedido detalle : detallesPedido) {
+            total = total.add(detalle.calcTotalItem());
+        }
+        
+        return total;
     }
     
     // A continuación se listan todos los métodos de seteo
@@ -157,11 +155,11 @@ public class Pedido {
                 retorno.append("\n - Cliente: ").append(nombreCliente);
                 retorno.append(" - Estado: ").append(estado.getNombre());
         
-        Iterator it = detallesPedido.iterator();
+        Iterator<DetallePedido> it = detallesPedido.iterator();
         while(it.hasNext())
         {
             retorno.append("\n");
-            DetallePedido detalle= (DetallePedido)it.next();
+            DetallePedido detalle = it.next();
             retorno.append(detalle.toString());
         }
         return  retorno.toString();

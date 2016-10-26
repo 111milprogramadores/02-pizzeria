@@ -116,7 +116,7 @@ public class PedidosDaoImpl implements PedidosDao {
         while (iter.hasNext()) {
             Pedido actual = iter.next();
             
-            if (actual.getEstado().getNombre().equals("Pendiente de Facturación")) {
+            if (actual.esPteFacturacion()) {
                 retorno.add(actual);
             }
         }

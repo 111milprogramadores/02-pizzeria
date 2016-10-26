@@ -98,9 +98,5 @@ public class DetallePedido {
         sb.append("\n Cantidad: ").append(cantidad).append("\n Precio: ").append(precio).append("Pizza: ").append(pizza.getNombre()).append("\n Estado: ").append(estado.getNombre());
         return sb.toString();
     }
-
-    public BigDecimal getSubtotal() {
-        return precio.multiply(new BigDecimal(cantidad));
-    }
     
 }

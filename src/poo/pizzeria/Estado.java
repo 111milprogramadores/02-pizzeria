@@ -33,26 +33,23 @@ public class Estado {
      * Método que devuelve true si el estado es Pendiente de Facturación, El estado Pendiente de facturación es del pedido.
      * @return 
      */
-    public boolean esPteFacturacion(){
-        //El método compareTo devuelve 0 cuando se cumple la igualdad. 
-        return nombre.compareTo("Pendiente de Facturación")==0;
+    public boolean esPteFacturacion() {
+        return nombre.equals("Pendiente de Facturación");
     }
     /**
      * Método que devuelve true si el estado es Facturado, sino devuelve false, El estado facturado es del pedido. 
      * @return 
      */
-    public boolean esFacturado(){
-        //El método compareTo devuelve 0 cuando se cumple la igualdad. 
-        return nombre.compareTo("Facturado")==0;
+    public boolean esFacturado() {
+        return nombre.equals("Facturado");
     }
     
     /**
      * Método que devuelve true si el estado es Generada, sino devuelve false, El estado generada es de la factura.
      * @return 
      */
-    public boolean esGenerada(){
-        //El método compareTo devuelve 0 cuando se cumple la igualdad. 
-        return nombre.compareTo("Generada")==0;
+    public boolean esGenerada() {
+        return nombre.equals("Generada");
     }
     
     

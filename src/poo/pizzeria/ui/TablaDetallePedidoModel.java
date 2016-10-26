@@ -55,7 +55,7 @@ class TablaDetallePedidoModel extends AbstractTableModel {
                 retorno = "$" + detalle.getPrecio();
                 break;
             case 6:
-                retorno = "$" + detalle.getSubtotal();
+                retorno = "$" + detalle.calcTotalItem();
                 break;
         }
         

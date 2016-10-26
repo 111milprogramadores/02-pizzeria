@@ -5,10 +5,9 @@
  */
 package poo.pizzeria.ui;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-import javax.swing.JFrame;
 import poo.pizzeria.Pedido;
 import poo.pizzeria.dao.EstadosDao;
 import poo.pizzeria.dao.EstadosDaoImpl;
@@ -22,7 +21,6 @@ import poo.pizzeria.dao.TiposDao;
 import poo.pizzeria.dao.TiposDaoImpl;
 import poo.pizzeria.dao.VariedadesDao;
 import poo.pizzeria.dao.VariedadesDaoImpl;
-import poo.pizzeria.ui.PantallaFacturacion;
 
 /**
  *
@@ -36,6 +34,8 @@ public class GestorFacturacion {
     private final TiposDao tiposDao;
     private final VariedadesDao variedadesDao;
     private final TamaniosDao tamaniosDao;
+    
+    private Pedido pedido;
 
     /**
      * Constructor por defecto.
@@ -54,6 +54,23 @@ public class GestorFacturacion {
         List<Pedido> pedidosPendientes = pedidosDao.buscarPendientesDeFacturacion();
         
         new PantallaFacturacion(pedidosPendientes, this).setVisible(true);
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+    
+    public void generarFactura () {
+        // ...
+    }
+    
+    public Date obtenerFechaYHoraActual () {
+        return Calendar.getInstance().getTime();
+    }
+    
+    public int obtenerNumeroFactura () {
+        // TODO obtener el siguiente nro de factura
+        return -1;
     }
          
 }

@@ -5,7 +5,9 @@
  */
 package poo.pizzeria.ui;
 
+import java.awt.event.WindowEvent;
 import java.util.List;
+import javax.swing.JOptionPane;
 import poo.pizzeria.Pedido;
 
 /**
@@ -51,6 +53,8 @@ public class PantallaFacturacion extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaDetallePedido = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        txtTotalPedido = new javax.swing.JTextField();
         panelPedido = new javax.swing.JPanel();
         JScrollPedido = new javax.swing.JScrollPane();
         tablaPedidos = new javax.swing.JTable();
@@ -91,20 +95,34 @@ public class PantallaFacturacion extends javax.swing.JFrame {
         tablaDetallePedido.setModel(tablaDetallePedidoModel);
         jScrollPane2.setViewportView(tablaDetallePedido);
 
+        jLabel1.setText("Monto Total del Pedido:");
+
+        txtTotalPedido.setEnabled(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTotalPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTotalPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addContainerGap())
         );
 
@@ -133,7 +151,7 @@ public class PantallaFacturacion extends javax.swing.JFrame {
             panelPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPedidoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JScrollPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                .addComponent(JScrollPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -175,10 +193,22 @@ public class PantallaFacturacion extends javax.swing.JFrame {
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // obtenemos el pedido seleccionado
         Pedido seleccionado = obtenerPedidoSeleccionado();
+        
+        if (seleccionado == null) {
+            // msj de que debe seleccionar un pedido
+        }
+        else {
+            int generaFactura = JOptionPane.showConfirmDialog (null, "Desea generar la Factura?", "Confirmación", JOptionPane.YES_OPTION);
+            if (generaFactura == JOptionPane.YES_OPTION) {
+                // delegamos la generación de la factura al gestor
+                gestor.setPedido(seleccionado);
+                gestor.generarFactura();
+            }
+        }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void tablaPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPedidosMouseClicked
@@ -189,6 +219,9 @@ public class PantallaFacturacion extends javax.swing.JFrame {
         if (seleccionado != null) {
             tablaDetallePedidoModel.setDetalles(seleccionado.getDetallesPedido());
             tablaDetallePedidoModel.fireTableDataChanged();
+            
+            // actualizamos el total del pedido
+            txtTotalPedido.setText("$" + seleccionado.calcTotalPedido());
         }
     }//GEN-LAST:event_tablaPedidosMouseClicked
 
@@ -197,6 +230,7 @@ public class PantallaFacturacion extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JFrame jFrame1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -204,6 +238,7 @@ public class PantallaFacturacion extends javax.swing.JFrame {
     private javax.swing.JPanel panelPedido;
     private javax.swing.JTable tablaDetallePedido;
     private javax.swing.JTable tablaPedidos;
+    private javax.swing.JTextField txtTotalPedido;
     // End of variables declaration//GEN-END:variables
 
     private Pedido obtenerPedidoSeleccionado () {
