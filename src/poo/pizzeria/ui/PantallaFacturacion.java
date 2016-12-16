@@ -6,8 +6,8 @@
 package poo.pizzeria.ui;
 
 import java.awt.event.WindowEvent;
-import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import poo.pizzeria.Pedido;
 
 /**
@@ -32,6 +32,8 @@ public class PantallaFacturacion extends javax.swing.JFrame {
         this.tablaDetallePedidoModel = new TablaDetallePedidoModel();
         
         initComponents();
+        
+        tablaPedidos.getSelectionModel().addListSelectionListener(new PedidosTableModelListener(this));
     }
   
     /**
@@ -221,17 +223,7 @@ public class PantallaFacturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void tablaPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPedidosMouseClicked
-        // obtenemos el pedido seleccionado
-        Pedido seleccionado = obtenerPedidoSeleccionado();
         
-        // actualizamos el detalle del pedido
-        if (seleccionado != null) {
-            tablaDetallePedidoModel.setDetalles(seleccionado.getDetallesPedido());
-            tablaDetallePedidoModel.fireTableDataChanged();
-            
-            // actualizamos el total del pedido
-            txtTotalPedido.setText("$" + seleccionado.calcTotalPedido());
-        }
     }//GEN-LAST:event_tablaPedidosMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -250,7 +242,7 @@ public class PantallaFacturacion extends javax.swing.JFrame {
     private javax.swing.JTextField txtTotalPedido;
     // End of variables declaration//GEN-END:variables
 
-    private Pedido obtenerPedidoSeleccionado () {
+    public Pedido obtenerPedidoSeleccionado () {
         Pedido retorno = null;
         int filaSeleccionada = tablaPedidos.getSelectedRow();
         
@@ -261,4 +253,13 @@ public class PantallaFacturacion extends javax.swing.JFrame {
         
         return retorno;
     }
+
+    public JTextField getTxtTotalPedido() {
+        return txtTotalPedido;
+    }
+
+    public TablaDetallePedidoModel getTablaDetallePedidoModel() {
+        return tablaDetallePedidoModel;
+    }
+    
 }
