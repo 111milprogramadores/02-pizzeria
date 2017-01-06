@@ -5,6 +5,7 @@
  */
 package poo.pizzeria.ui;
 
+import poo.pizzeria.controller.GestorFacturacion;
 import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;

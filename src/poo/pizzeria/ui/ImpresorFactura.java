@@ -18,7 +18,7 @@ public class ImpresorFactura extends javax.swing.JFrame {
     private final SimpleDateFormat formatoFecha;
     private final SimpleDateFormat formatoHora;
 
-    ImpresorFactura(Pedido pedido) {
+    public ImpresorFactura(Pedido pedido) {
         this.pedido = pedido;
         this.formatoHora  = new SimpleDateFormat("HH:mm");
         this.formatoFecha = new SimpleDateFormat("dd/MM/yyyy");

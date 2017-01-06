@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package poo.pizzeria.ui;
+package poo.pizzeria.controller;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -28,6 +28,8 @@ import poo.pizzeria.dao.TiposDaoImpl;
 import poo.pizzeria.dao.VariedadesDao;
 import poo.pizzeria.dao.VariedadesDaoImpl;
 import poo.pizzeria.dao.EstadosPedidoDao;
+import poo.pizzeria.ui.ImpresorFactura;
+import poo.pizzeria.ui.PantallaFacturacion;
 
 /**
  *

@@ -5,6 +5,7 @@
  */
 package poo.pizzeria.ui;
 
+import poo.pizzeria.controller.GestorFacturacion;
 import poo.pizzeria.Pedido;
 
 /**
