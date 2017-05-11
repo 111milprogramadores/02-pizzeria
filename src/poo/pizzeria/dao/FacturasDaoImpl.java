@@ -22,8 +22,8 @@ public class FacturasDaoImpl implements FacturasDao {
     }
 
     @Override
-    public int obtenerProximoNumero() {
-        return this.facturas.size() + 1;
+    public Long obtenerProximoNumero() {
+        return (long) this.facturas.size() + 1;
     }
 
     @Override

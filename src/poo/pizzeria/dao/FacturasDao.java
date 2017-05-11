@@ -13,7 +13,7 @@ import poo.pizzeria.Factura;
  */
 public interface FacturasDao {
     
-    public int obtenerProximoNumero ();
+    public Long obtenerProximoNumero ();
     public void guardar (Factura factura);
     
 }

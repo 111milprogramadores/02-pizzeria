@@ -8,26 +8,19 @@ package poo.pizzeria.controller;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.SessionFactory;
 import poo.pizzeria.EstadoFactura;
 import poo.pizzeria.EstadoPedido;
 import poo.pizzeria.Factura;
 import poo.pizzeria.Pedido;
 import poo.pizzeria.dao.EstadosFacturaDao;
-import poo.pizzeria.dao.EstadosFacturaDaoImpl;
-import poo.pizzeria.dao.EstadosPedidoDaoImpl;
+import poo.pizzeria.dao.EstadosFacturaDaoHibernateImpl;
 import poo.pizzeria.dao.FacturasDao;
-import poo.pizzeria.dao.FacturasDaoImpl;
 import poo.pizzeria.dao.PedidosDao;
-import poo.pizzeria.dao.PedidosDaoImpl;
-import poo.pizzeria.dao.PizzasDao;
-import poo.pizzeria.dao.PizzasDaoImpl;
-import poo.pizzeria.dao.TamaniosDao;
-import poo.pizzeria.dao.TamaniosDaoImpl;
-import poo.pizzeria.dao.TiposDao;
-import poo.pizzeria.dao.TiposDaoImpl;
-import poo.pizzeria.dao.VariedadesDao;
-import poo.pizzeria.dao.VariedadesDaoImpl;
 import poo.pizzeria.dao.EstadosPedidoDao;
+import poo.pizzeria.dao.EstadosPedidoDaoHibernateImpl;
+import poo.pizzeria.dao.FacturasDaoHibernateImpl;
+import poo.pizzeria.dao.PedidosDaoHibernateImpl;
 import poo.pizzeria.ui.ImpresorFactura;
 import poo.pizzeria.ui.PantallaFacturacion;
 
@@ -38,29 +31,22 @@ import poo.pizzeria.ui.PantallaFacturacion;
 public class GestorFacturacion {
     
     private final PedidosDao pedidosDao;
-    private final PizzasDao pizzasDao;
     private final EstadosPedidoDao estadosPedidoDao;
     private final EstadosFacturaDao estadosFacturaDao;
-    private final TiposDao tiposDao;
-    private final VariedadesDao variedadesDao;
-    private final TamaniosDao tamaniosDao;
     private final FacturasDao facturasDao;
     
     private Pedido pedido;
 
     /**
      * Constructor por defecto.
+     * @param sessionFactory
      */
-    public GestorFacturacion() {
+    public GestorFacturacion(SessionFactory sessionFactory) {
         // creamos las instancias de los objetos de acceso a datos
-        this.tiposDao = new TiposDaoImpl();
-        this.variedadesDao = new VariedadesDaoImpl();
-        this.tamaniosDao = new TamaniosDaoImpl();
-        this.pizzasDao = new PizzasDaoImpl(tiposDao, variedadesDao, tamaniosDao);
-        this.estadosPedidoDao = new EstadosPedidoDaoImpl();
-        this.estadosFacturaDao = new EstadosFacturaDaoImpl();
-        this.pedidosDao = new PedidosDaoImpl(pizzasDao, estadosPedidoDao);
-        this.facturasDao = new FacturasDaoImpl();
+        this.estadosPedidoDao = new EstadosPedidoDaoHibernateImpl(sessionFactory);
+        this.estadosFacturaDao = new EstadosFacturaDaoHibernateImpl(sessionFactory);
+        this.pedidosDao = new PedidosDaoHibernateImpl(estadosPedidoDao, sessionFactory);
+        this.facturasDao = new FacturasDaoHibernateImpl(sessionFactory);
     }
 
     public void run () {
@@ -77,7 +63,7 @@ public class GestorFacturacion {
     
     public void generarFactura () {
         // buscamos las entidades relacionadas
-        int numero = facturasDao.obtenerProximoNumero();
+        long numero = facturasDao.obtenerProximoNumero();
         EstadoFactura generada = estadosFacturaDao.buscarPorNombre("Generada");
         EstadoPedido facturado = estadosPedidoDao.buscarPorNombre("Facturado");
         Date ahora = Calendar.getInstance().getTime();
@@ -85,15 +71,16 @@ public class GestorFacturacion {
         // creamos la factura para el pedido
         Factura factura = new Factura(ahora, numero, generada, pedido.getDetallesPedido());
         
-        // facturamos el pedido
-        pedido.facturar (factura, facturado);
-        
         // guardamos la factura en el repositorio de datos
         facturasDao.guardar(factura);
+        
+        // facturamos el pedido
+        pedido.facturar (factura, facturado);
+        pedidosDao.guardar(pedido);
     }
 
     public void imprimir(Pedido pedido) {
         new ImpresorFactura(pedido).setVisible(true);
     }
-         
+
 }

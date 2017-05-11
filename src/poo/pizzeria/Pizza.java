@@ -12,6 +12,8 @@ import java.math.BigDecimal;
  * @author Candelaria
  */
 public class Pizza {
+    
+    private Integer id;
     private String nombre;
     private BigDecimal precio;
     private TipoPizza tipoPizza;
@@ -48,6 +50,14 @@ public class Pizza {
         this.tipoPizza = tipoPizza;
         this.variedad = variedad;
         this.tamanio = tamanio;
+    }
+    
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {

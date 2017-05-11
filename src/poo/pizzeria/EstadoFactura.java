@@ -11,6 +11,7 @@ package poo.pizzeria;
  */
 public class EstadoFactura {
     
+    private Integer id;
     private String nombre;
     private String descripcion;
     
@@ -42,6 +43,13 @@ public class EstadoFactura {
     // A continuación se listan todos los métodos de seteo
     // de cada atributo de la clase
     
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
     public String getNombre() {
         return nombre;
     }

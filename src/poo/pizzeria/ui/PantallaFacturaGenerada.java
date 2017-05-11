@@ -21,6 +21,7 @@ public class PantallaFacturaGenerada extends javax.swing.JFrame {
      * Creates new form PantallaFacturaGenerada
      * 
      * @param pedido
+     * @param gestor
      */
     public PantallaFacturaGenerada(Pedido pedido, GestorFacturacion gestor) {
         this.pedido = pedido;

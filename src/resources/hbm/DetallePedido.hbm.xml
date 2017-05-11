@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="poo.pizzeria.DetallePedido" table="DetallePedido">
+      <id name="id" column="id_detalle_pedido">
+          <generator class="increment"/>
+      </id>
+      <property name="cantidad" />
+      <property name="precio" type="java.math.BigDecimal" />
+      
+      <many-to-one name="pizza" class="poo.pizzeria.Pizza" column="id_pizza" lazy="false" />
+      <many-to-one name="estado" class="poo.pizzeria.EstadoPedido" column="id_estado_pedido" lazy="false" />
+      <!--<many-to-one name="factura" class="poo.pizzeria.Factura" column="numero_factura" />-->
+    </class>
+</hibernate-mapping>

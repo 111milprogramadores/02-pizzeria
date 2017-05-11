@@ -11,6 +11,7 @@ package poo.pizzeria;
  */
 public class TamanioPizza {
     
+    private Integer id;
     private int cantPorciones;
     private String nombre;
 
@@ -32,6 +33,14 @@ public class TamanioPizza {
     
     // A continuación se listan todos los métodos de seteo
     // de cada atributo de la clase
+    
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
     
     public int getCantPorciones() {
         return cantPorciones;

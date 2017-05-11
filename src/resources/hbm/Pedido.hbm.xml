@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="poo.pizzeria.Pedido" table="Pedido">
+      <id name="numero" column="numero_pedido">
+          <generator class="increment"/>
+      </id>
+      <property name="fechaHoraCreacion" column="fecha_hora_creacion" type="java.util.Date" />
+      <property name="fechaHoraEntrega" column="fecha_hora_entrega" type="java.util.Date" />
+      <property name="nombreCliente" column="nombre_cliente" />
+      
+      <many-to-one name="factura" class="poo.pizzeria.Factura" column="numero_factura" />
+      <many-to-one name="estado" class="poo.pizzeria.EstadoPedido" column="id_estado_pedido" lazy="false" />
+      
+      <bag name="detallesPedido" cascade="all" lazy="false">
+          <key column="numero_pedido" not-null="true" />
+          <one-to-many class="poo.pizzeria.DetallePedido" />
+      </bag>
+  </class>
+</hibernate-mapping>

@@ -14,6 +14,7 @@ import java.math.BigInteger;
  */
 public class DetallePedido {
     
+    private Integer id;
     private int cantidad;
     private BigDecimal precio;
     private Pizza pizza;
@@ -60,6 +61,15 @@ public class DetallePedido {
     
     // A continuación se listan todos los métodos de seteo
     // de cada atributo de la clase
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
     public int getCantidad() {
         return cantidad;
     }

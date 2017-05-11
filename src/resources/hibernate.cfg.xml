@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/poo-pizzeria?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">root</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.connection.autocommit">true</property>
+    <mapping resource="resources/hbm/TipoPizza.hbm.xml"/>
+    <mapping resource="resources/hbm/VariedadPizza.hbm.xml"/>
+    <mapping resource="resources/hbm/TamanioPizza.hbm.xml"/>
+    <mapping resource="resources/hbm/Pizza.hbm.xml"/>
+    <mapping resource="resources/hbm/EstadoPedido.hbm.xml"/>
+    <mapping resource="resources/hbm/EstadoFactura.hbm.xml"/>
+    <mapping resource="resources/hbm/Pedido.hbm.xml"/>
+    <mapping resource="resources/hbm/DetallePedido.hbm.xml"/>
+    <mapping resource="resources/hbm/Factura.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

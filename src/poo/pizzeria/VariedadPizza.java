@@ -10,6 +10,8 @@ package poo.pizzeria;
  * @author Candelaria
  */
 public class VariedadPizza {
+    
+    private Integer id;
     private String ingredientes;
     private String nombre;
 
@@ -31,6 +33,14 @@ public class VariedadPizza {
 
     // A continuación se listan todos los métodos de seteo
     // de cada atributo de la clase
+    
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
     
     public String getIngredientes() {
         return ingredientes;

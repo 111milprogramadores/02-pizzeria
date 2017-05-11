@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="poo.pizzeria.TamanioPizza" table="TamanioPizza">
+      <id name="id" column="id_tamanio_pizza">
+          <generator class="increment"/>
+      </id>
+      <property name="nombre" />
+      <property name="cantPorciones" column="cant_porciones" />
+  </class>
+</hibernate-mapping>

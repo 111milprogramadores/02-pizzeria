@@ -15,5 +15,7 @@ import poo.pizzeria.Pedido;
 public interface PedidosDao {
     
     public List<Pedido> buscarPendientesDeFacturacion();
+
+    public void guardar(Pedido pedido);
     
 }
