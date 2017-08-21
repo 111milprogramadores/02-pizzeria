@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="variedades-mas-vendidas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2906e71d-3fc7-4ad0-9069-58e8fa285648">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="poo-pizzeria"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="fechaDesde" class="java.util.Date"/>
+	<parameter name="fechaHasta" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[select vp.nombre, SUM(cantidad) as "cantidad", SUM(dp.cantidad * dp.precio) as "subtotal"
+from DetallePedido dp
+join Pedido p on dp.numero_pedido = p.numero_pedido
+join Factura f on p.numero_factura = f.numero_factura
+join Pizza pi on pi.id_pizza = dp.id_pizza
+join VariedadPizza vp on vp.id_variedad_pizza = pi.id_variedad_pizza
+where 
+  f.fecha_hora_emision >=  $P{fechaDesde} and 
+  f.fecha_hora_emision <=  $P{fechaHasta} 
+group by vp.nombre
+limit 10]]>
+	</queryString>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="cantidad" class="java.math.BigDecimal"/>
+	<field name="subtotal" class="java.math.BigDecimal"/>
+	<sortField name="cantidad" order="Descending"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="24" width="501" height="30" uuid="51a10026-bc9d-41c6-9545-e9b05aaf04b5"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de las 10 Variedades más Vendidas en un Periodo]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="50">
+			<staticText>
+				<reportElement x="0" y="10" width="70" height="15" uuid="6b31c70c-74e1-452a-b183-0ffb2562aa9f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha desde:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="70" y="10" width="230" height="15" uuid="a087f4a5-5e3d-421f-a336-7843292fad87"/>
+				<textFieldExpression><![CDATA[$P{fechaDesde}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="25" width="70" height="15" uuid="039dfbcb-e4d1-49fa-9272-b822b05980c1">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha hasta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="70" y="25" width="230" height="15" uuid="4c3e202e-2b6f-48a0-a74b-f96bb59f168c"/>
+				<textFieldExpression><![CDATA[$P{fechaHasta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="15" uuid="ec2e2d03-4d5f-4633-a163-4c0236816cef"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Variedad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="15" uuid="b41d08ba-f01d-47ad-b610-ba7f57a3b89e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="15" uuid="ae0f4479-6d0f-49b2-9b58-77f87f5a2463">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Subtotal]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="15" uuid="1c7658a8-4347-412b-8b04-8e7193bb0e01"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="15" uuid="5af66e10-71b0-49da-b39f-e480b5001bf5"/>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="15" uuid="5e363c16-dec5-4dee-a1f1-0a43a0be7155"/>
+				<textFieldExpression><![CDATA["$" + $F{subtotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

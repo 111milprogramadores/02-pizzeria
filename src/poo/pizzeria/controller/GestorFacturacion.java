@@ -30,6 +30,8 @@ import poo.pizzeria.ui.PantallaFacturacion;
  */
 public class GestorFacturacion {
     
+    private final SessionFactory sessionFactory;
+    
     private final PedidosDao pedidosDao;
     private final EstadosPedidoDao estadosPedidoDao;
     private final EstadosFacturaDao estadosFacturaDao;
@@ -42,6 +44,8 @@ public class GestorFacturacion {
      * @param sessionFactory
      */
     public GestorFacturacion(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+        
         // creamos las instancias de los objetos de acceso a datos
         this.estadosPedidoDao = new EstadosPedidoDaoHibernateImpl(sessionFactory);
         this.estadosFacturaDao = new EstadosFacturaDaoHibernateImpl(sessionFactory);
@@ -81,6 +85,10 @@ public class GestorFacturacion {
 
     public void imprimir(Pedido pedido) {
         new ImpresorFactura(pedido).setVisible(true);
+    }
+    
+    public void iniciarGenerarReporte () {
+        new GestorReporte(sessionFactory).run();
     }
 
 }
